@@ -13,7 +13,10 @@ object UnexpectedmessagesBuild extends Build {
       scalaVersion := "2.10.0",
       scalacOptions ++= Seq("-feature", "-deprecation"),
       resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases",
-      libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.1.2"
+      libraryDependencies ++= Seq(
+        "com.typesafe.akka" %% "akka-actor" % "2.1.2",
+        "org.scalatest" % "scalatest_2.10" % "2.0.M6-SNAP30" % "test"
+      )
     )
   )
 }
