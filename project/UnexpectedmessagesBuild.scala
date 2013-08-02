@@ -1,7 +1,7 @@
 import sbt._
 import sbt.Keys._
 
-object UnexpectedmessagesBuild extends Build {
+object UnexpectedMessagesBuild extends Build {
 
   lazy val unexpectedmessages = Project(
     id = "unexpectedmessages",
@@ -15,6 +15,7 @@ object UnexpectedmessagesBuild extends Build {
       resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases",
       libraryDependencies ++= Seq(
         "com.typesafe.akka" %% "akka-actor" % "2.1.2",
+        "com.typesafe.akka" %% "akka-testkit" % "2.1.2",
         "org.scalatest" % "scalatest_2.10" % "2.0.M6-SNAP30" % "test"
       )
     )

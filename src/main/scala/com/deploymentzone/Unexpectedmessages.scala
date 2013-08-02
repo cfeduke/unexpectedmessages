@@ -5,33 +5,25 @@ import akka.pattern.ask
 import scala.concurrent.duration._
 import akka.util.Timeout
 
-case object Tick
-case object Get
+case object On
+case object Off
+case class TransmitData(data : Any)
+case object Transmitted
 
-class Counter extends Actor {
-  var count = 0
+class Throttler extends Actor with ActorLogging {
 
-  def receive = {
-    case Tick => count += 1
-    case Get  => sender ! count
-  }
-}
-
-object Unexpectedmessages extends App {
-  val system = ActorSystem("Unexpectedmessages")
-  implicit val ec = system.dispatcher
-
-  val counter = system.actorOf(Props[Counter])
-
-  counter ! Tick
-  counter ! Tick
-  counter ! Tick
-
-  implicit val timeout = Timeout(5.seconds)
-
-  (counter ? Get) onSuccess {
-    case count => println("Count is " + count)
+  def inactive : Receive = {
+    case On => context.become(active)
   }
 
-  system.shutdown()
+  def active : Receive = {
+    case Off => context.become(inactive)
+    case TransmitData(data) =>
+      log.info(s"transmitting $data")
+      sender ! Transmitted
+  }
+
+  def receive = inactive
 }
+
+
