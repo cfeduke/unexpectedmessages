@@ -1,5 +1,3 @@
-A sample for the Typesafe Stack (http://typesafe.com/stack).
+## UnhandledMessage test expectations
 
-Akka 2.1.2 sample project using Scala and SBT.
-
-To run and test it use SBT invoke: 'sbt run'
+Simple contrived example to support the post on my [blog](http://www.deploymentzone.com/2013/08/02/verifying-unexpected-messages-in-an-akka-actor/).
